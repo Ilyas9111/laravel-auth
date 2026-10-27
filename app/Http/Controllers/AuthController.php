@@ -31,8 +31,22 @@ class AuthController extends Controller
         auth()->login($user);
     }
 
-    public function Login()
+    public function Login(Request $request)
     {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if (auth()->attempt($validated)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('ninjas.index');
+        }
+
+        throw ValidationException::withMessages([
+            'credentials' => 'Sorry, incorrect credentials. Please try again.',
+        ]);
 
     }
 

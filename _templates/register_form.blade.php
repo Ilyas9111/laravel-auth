@@ -21,12 +21,11 @@
 
   <!-- validation errors -->
    @if ($errors->any())
-    <div class="alert alert-danger mt-4">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-  
+    <ul class="px-4 py-2 bg-red-100">
+        @foreach ($errors->all() as $error)
+            <li class="text-red-500">{{ $error }}</li>
+        @endforeach
+    </ul>
+  @endif
+
 </form>
